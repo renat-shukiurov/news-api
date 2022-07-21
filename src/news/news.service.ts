@@ -16,7 +16,7 @@ export class NewsService {
             .leftJoinAndSelect("news.category", "category")
             .select(['news.image', 'news.title', 'news.date', 'news.short_description', 'news.likes', 'category'])
 
-        if (categoryId) query.where('news.category = :id', {id: categoryId})
+        if (categoryId > 0){ query.where('news.category = :id', {id: categoryId}) }
 
         return paginate<News>(query, options)
     }
