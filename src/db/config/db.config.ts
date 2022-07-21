@@ -8,6 +8,7 @@ export default registerAs('database', () => {
         username:"root",
         password: process.env.MYSQL_ROOT_PASSWORD,
         database: process.env.MYSQL_DATABASE,
+        autoLoadEntities: true,
         entities:["dist/**/*.entity{.ts,.js}"],
         synchronize:true,
         dropSchema:false,

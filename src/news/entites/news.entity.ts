@@ -1,6 +1,6 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from "typeorm";
 import {IsString, IsInt} from 'class-validator';
-import {Category} from "../category/category.entity";
+import {Category} from "../../category/entites/category.entity";
 
 @Entity()
 export class News {

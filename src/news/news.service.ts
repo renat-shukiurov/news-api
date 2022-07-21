@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import {News} from "./news.entity";
+import {News} from "./entites/news.entity";
 import {Repository} from "typeorm";
 import {InjectRepository} from "@nestjs/typeorm";
+import {IPaginationOptions, paginate, Pagination} from "nestjs-typeorm-paginate";
 
 @Injectable()
 export class NewsService {
@@ -9,12 +10,23 @@ export class NewsService {
         @InjectRepository(News) private newsRepository: Repository<News>,
     ) {}
 
-    async getNews(): Promise<News[]> {
-        return await this.newsRepository.find();
+    async getNews(categoryId: number,options: IPaginationOptions): Promise<Pagination<News>> {
+        const query = this.newsRepository
+            .createQueryBuilder('news')
+            .leftJoinAndSelect("news.category", "category")
+            .select(['news.image', 'news.title', 'news.date', 'news.short_description', 'news.likes', 'category'])
+
+        if (categoryId) query.where('news.category = :id', {id: categoryId})
+
+        return paginate<News>(query, options)
     }
 
     async findOne(id: number): Promise<News | undefined> {
-        return await this.newsRepository.findOneBy({id});
+        return await this.newsRepository.createQueryBuilder('news')
+            .leftJoinAndSelect("news.category", "category")
+            .select(['news.image', 'news.title', 'news.full_description', 'news.likes', 'category'])
+            .where('news.category = :id', {id})
+            .getOne();
     }
 
 }

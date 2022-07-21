@@ -1,6 +1,6 @@
-import {Controller, Get, NotFoundException, Param, ParseIntPipe} from '@nestjs/common';
+import {Controller, Get, NotFoundException, Param, ParseIntPipe, Query} from '@nestjs/common';
 import {NewsService} from "./news.service";
-import {News} from "./news.entity";
+import {News} from "./entites/news.entity";
 
 @Controller('news')
 export class NewsController {
@@ -8,8 +8,13 @@ export class NewsController {
     constructor(private newsService: NewsService) {}
 
     @Get()
-    async findAll() {
-        return await this.newsService.getNews();
+    findAll(
+        @Query('categoryId') categoryId,
+        @Query('page') page = 1,
+        @Query('limit') limit = 10
+    ) {
+        limit = limit > 10 ? 10 : limit;
+        return this.newsService.getNews(categoryId, {page,limit});
     }
 
     @Get(':id')

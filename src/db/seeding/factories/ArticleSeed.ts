@@ -1,7 +1,7 @@
 import { Faker } from '@faker-js/faker';
 import { define } from "typeorm-seeding";
 
-import {News} from "../../../news/news.entity";
+import {News} from "../../../news/entites/news.entity";
 
 define(News, (faker: Faker) => {
     const news = new News();

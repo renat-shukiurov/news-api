@@ -1,7 +1,7 @@
 import { Factory, Seeder } from "typeorm-seeding";
 
-import {Category} from "../../../category/category.entity";
-import {News} from "../../../news/news.entity";
+import {Category} from "../../../category/entites/category.entity";
+import {News} from "../../../news/entites/news.entity";
 
 export default class InitialDatabaseSeed implements Seeder {
     public async run(factory: Factory) {
