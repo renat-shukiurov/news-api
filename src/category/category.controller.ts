@@ -9,14 +9,13 @@ export class CategoryController {
 
     @Get()
     async findAll() {
-        const categories:Category[] = await this.categoryService.getCategories();
-        if (categories === undefined) return [];
+        return await this.categoryService.getCategories();
     }
 
     @Get(':id')
     async findOne(@Param('id', ParseIntPipe) id) {
-        const category = await this.categoryService.findOne(id);
-        if (category === undefined) throw new NotFoundException();
+        const category:Category = await this.categoryService.findOne(id);
+        if (!category) throw new NotFoundException();
     }
 
 }

@@ -9,14 +9,13 @@ export class NewsController {
 
     @Get()
     async findAll() {
-        const news:News[] = await this.newsService.getNews();
-        if (news === undefined) return [];
+        return await this.newsService.getNews();
     }
 
     @Get(':id')
     async findOne(@Param('id', ParseIntPipe) id) {
         const news:News = await this.newsService.findOne(id);
-        if(news === undefined) throw new NotFoundException();
+        if(!news) throw new NotFoundException();
     }
 
 }
