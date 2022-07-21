@@ -14,7 +14,7 @@ export class NewsService {
         const query = this.newsRepository
             .createQueryBuilder('news')
             .leftJoinAndSelect("news.category", "category")
-            .select(['news.image', 'news.title', 'news.date', 'news.short_description', 'news.likes', 'category'])
+            .select(['news.id', 'news.image', 'news.title', 'news.date', 'news.short_description', 'news.likes', 'category'])
 
         if (categoryId > 0){ query.where('news.category = :id', {id: categoryId}) }
 
@@ -25,7 +25,7 @@ export class NewsService {
         return await this.newsRepository.createQueryBuilder('news')
             .leftJoinAndSelect("news.category", "category")
             .select(['news.image', 'news.title', 'news.full_description', 'news.likes', 'category'])
-            .where('news.category = :id', {id})
+            .where('news.id = :id', {id})
             .getOne();
     }
 

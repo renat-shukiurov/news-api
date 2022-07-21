@@ -21,6 +21,8 @@ export class NewsController {
     async findOne(@Param('id', ParseIntPipe) id) {
         const news:News = await this.newsService.findOne(id);
         if(!news) throw new NotFoundException();
+
+        return news;
     }
 
 }

@@ -16,6 +16,8 @@ export class CategoryController {
     async findOne(@Param('id', ParseIntPipe) id) {
         const category:Category = await this.categoryService.findOne(id);
         if (!category) throw new NotFoundException();
+
+        return category;
     }
 
 }
