@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  mysql:
+    platform: linux/x86_64
+    container_name: dev-mysql-5.7
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    volumes:
+      - ${MYSQL_LIB_PATH}:/var/lib/mysql
+      - ${MYSQL_LOG_PATH}:/var/log/mysql
+      - ./src/config/common.cnf:/etc/mysql/conf.d/common.cnf
+    ports:
+      - ${MYSQL_LOCAL_PORT}:3306
+    restart: "always"
+    networks:
+      - newsapp
+
+networks:
+  newsapp:
+    external: true
