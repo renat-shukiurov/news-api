@@ -8,7 +8,7 @@ define(News, (faker: Faker) => {
 
   news.title = faker.lorem.words(Math.floor(Math.random() * 10 + 5));
   news.full_description = faker.lorem.words(
-    Math.floor(Math.random() * 100 + 5),
+    Math.floor(Math.random() * 100 + 200),
   );
   news.short_description = faker.lorem.words(
     Math.floor(Math.random() * 10 + 5),

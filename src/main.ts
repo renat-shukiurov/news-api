@@ -5,7 +5,7 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  let whitelist = ['http://localhost:3000'];
+  const whitelist = ['http://localhost:3000'];
   app.enableCors({
     origin: function (origin, callback) {
       if (whitelist.indexOf(origin) !== -1) {
