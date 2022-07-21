@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import {ConfigModule, ConfigService} from "@nestjs/config";
-import dbConfig from "./db/config/db.config";
-import {TypeOrmModule} from "@nestjs/typeorm";
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import dbConfig from './db/config/db.config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { NewsModule } from './news/news.module';
 import { CategoryModule } from './category/category.module';
 
@@ -15,7 +15,9 @@ import { CategoryModule } from './category/category.module';
     }),
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => ({...configService.get('database')})
+      useFactory: async (configService: ConfigService) => ({
+        ...configService.get('database'),
+      }),
     }),
     NewsModule,
     CategoryModule,
