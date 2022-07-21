@@ -11,7 +11,6 @@ services:
     volumes:
       - ${MYSQL_LIB_PATH}:/var/lib/mysql
       - ${MYSQL_LOG_PATH}:/var/log/mysql
-      - ./src/config/common.cnf:/etc/mysql/conf.d/common.cnf
     ports:
       - ${MYSQL_LOCAL_PORT}:3306
     restart: "always"
