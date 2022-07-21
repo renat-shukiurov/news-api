@@ -4,7 +4,7 @@
 
 ```bash
 $ yarn install
-$ cd .env.example .env (set your vars)
+$ cp .env.example .env # set your vars
 ```
 
 ## Running the app
